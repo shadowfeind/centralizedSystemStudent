@@ -11,6 +11,9 @@ import {
 import { HashRouter as Router, Link, Route, Switch } from "react-router-dom";
 import LoadingComp from "./components/LoadingComp";
 
+const VideoConference = lazy(() =>
+  import("./student/videoConference/VideoConference")
+);
 const AccountStatement = lazy(() =>
   import("./student/accountStatement/AccountStatement")
 );
@@ -94,6 +97,11 @@ const App = () => {
                 component={AcademicGrading}
               />
               <Route exact path={"/notification"} component={Notification} />
+              <Route
+                exact
+                path={"/video-conference"}
+                component={VideoConference}
+              />
               <Route exact path={"/"} component={Dashboard} />
               <Route path="*" component={PageNotFound} />
             </Switch>

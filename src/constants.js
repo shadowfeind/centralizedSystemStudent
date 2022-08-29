@@ -1,22 +1,13 @@
-// export const API_URL = "http://103.90.86.151:84";
-// export const API_URL = "http://103.90.86.151:106";
 export const API_URL = "https://school.vidyacube.com";
-// export const API_URL = "http://192.168.1.85:88";
-// export const API_URL = "https://divinelight.vidyacube.com";
-// export const API_URL = "https://mis.vidyacube.com";
-// export const API_URL = "https://creation.vidyacube.com";
+export const ZOOM_API_KEY = "pjaQwxmzQHqA4rW_FzHHFg";
+export const ZOOM_API_SCERET = "X5xHThKpuovnXozmtZOhCQ2fni5cbllE5tXx";
+export const ZOOM_JWT =
+  "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOm51bGwsImlzcyI6InBqYVF3eG16UUhxQTRyV19GekhIRmciLCJleHAiOjE2NjIyODMxOTIsImlhdCI6MTY2MTY3ODM5Mn0.tCFN36DZF3bjBFQ2jWmhm2MxEQcyskMaFLm0ho7dFuY";
 import jwt_decode from "jwt-decode";
 import moment from "moment";
 import axios from "axios";
 
 export const USER_SESSION = sessionStorage.getItem("blueberrytoken");
-
-// export const tokenConfig = {
-//   headers: {
-//     "Content-Type": "application/json",
-//     Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIwZjk4YjRkOS1iOTIzLTRmNzAtOGY3ZC1hOTQ4YjFjOGJjYjYiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiMTUwNjciLCJJRFVzZXIiOiIxNTA2NyIsIklEUm9sZSI6IjgiLCJNYXJrQXNBZG1pbiI6IkZhbHNlIiwiSURIUkJyYW5jaCI6IjEiLCJJRERlcGFydG1lbnQiOiIxIiwiY29tcGFueSI6IjIiLCJJc1RlbXBvcmFyeVNlc3Npb25FbmFibGVkIjoiRmFsc2UiLCJJc05ld2x5QWRlZCI6IkZhbHNlIiwiSXNEZXBhcnRtZW50SGVhZCI6IkZhbHNlIiwiUmVtZW1iZXJNZSI6IkZhbHNlIiwiRnVsbE5hbWUiOiJsNCAgbDQiLCJwaWRSZWZGb3JFZGl0IjoiTDQiLCJleHAiOjE2NTIzMzE2MTMsImlzcyI6Imh0dHA6Ly9teXNpdGUuY29tIiwiYXVkIjoiaHR0cDovL215c2l0ZS5jb20ifQ.0pgS4b2VrBDYFhLlul2CNEIsXej03RUUUthG5GcCTZ8`,
-//   },
-// };
 
 //for fcm token
 export const tokenHeader = {
@@ -32,18 +23,6 @@ export const tokenConfig = () => {
     : null;
 
   if (user) {
-    // const userSessionCheck = jwt_decode(user.AccessToken);
-    // const isExpired = userSessionCheck.exp - moment().unix() < 1;
-    // console.log(userSessionCheck.exp);
-    // console.log(moment.unix(userSessionCheck.exp));
-    // console.log(moment().unix());
-    // console.log(isExpired);
-    // if (isExpired) {
-    //   localStorage.removeItem("blueberryToken");
-    //   document.location.href = "/#/login/5";
-    //   return;
-    // }
-
     const tokenReturn = {
       headers: {
         "Content-Type": "application/json",
@@ -58,10 +37,6 @@ export const tokenConfig = () => {
 
 export const axiosInstance = axios.create({
   baseURL: API_URL,
-  // headers: {
-  //   "Content-Type": "application/json",
-  //   Authorization: `Bearer ${userSession}`,
-  // },
 });
 
 axiosInstance.interceptors.request.use(async (req) => {

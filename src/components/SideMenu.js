@@ -254,6 +254,14 @@ const SideMenu = () => {
         <FileCopyIcon fontSize="medium" />
         <Typography variant="h6">Account Statement</Typography>
       </NavLink>
+      <NavLink
+        to={"/video-conference"}
+        activeStyle={isActive}
+        className={classes.textBox}
+      >
+        <FileCopyIcon fontSize="medium" />
+        <Typography variant="h6">Video Conference</Typography>
+      </NavLink>
 
       <Notification notify={notify} setNotify={setNotify} />
     </div>
