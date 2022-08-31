@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Button, Grid } from "@material-ui/core";
+import { Button, DialogContent, Grid } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import InputControl from "../../../components/controls/InputControl";
 import { useForm, Form } from "../../../customHooks/useForm";
 import DatePickerControl from "../../../components/controls/DatePickerControl";
 import { putSingleAssignmentAction } from "./AssignmentActions";
 import { API_URL } from "../../../constants";
+import DialogFooter from "../../../components/DialogFooter";
 
 const initialFormValues = {
   IDAssignment: 0,
@@ -92,133 +93,128 @@ const AssignmentEditForm = ({
 
   return (
     <>
-      <Form onSubmit={handleSubmit}>
-        <Grid container style={{ fontSize: "12px" }}>
-          <Grid item xs={6}>
-            <InputControl
-              disabled
-              name="FullName"
-              label="Full Name"
-              value={values.CreatedBy}
-              variant="filled"
-            />
-            <InputControl
-              disabled
-              name="TeacherMobileNumber"
-              label="Mobile Number"
-              value={values.TeacherMobileNumber}
-              variant="filled"
-            />
+      <DialogContent>
+        <Form onSubmit={handleSubmit}>
+          <Grid container style={{ fontSize: "12px" }}>
+            <Grid item xs={6}>
+              <InputControl
+                disabled
+                name="FullName"
+                label="Full Name"
+                value={values.CreatedBy}
+                variant="filled"
+              />
+              <InputControl
+                disabled
+                name="TeacherMobileNumber"
+                label="Mobile Number"
+                value={values.TeacherMobileNumber}
+                variant="filled"
+              />
 
-            <InputControl
-              disabled
-              name="AssignmentDate"
-              label="FromDate"
-              value={values.AssignmentDate}
-              variant="filled"
-            />
-            <InputControl
-              disabled
-              name="AssignmentSummary"
-              label="Assignment Summary"
-              value={values.AssignmentSummary}
-              variant="filled"
-            />
-            <InputControl
-              name="ImageUploaded"
-              // value={values.ClassLocation}
-              onChange={(e) => handleImage(e)}
-              type="file"
-            />
-            <img
-              src={
-                imgSrc
-                  ? imgSrc
-                  : assignmentImage && `${API_URL}${assignmentImage}`
-              }
-              height={200}
-              width={200}
-            />
+              <InputControl
+                disabled
+                name="AssignmentDate"
+                label="FromDate"
+                value={values.AssignmentDate}
+                variant="filled"
+              />
+              <InputControl
+                disabled
+                name="AssignmentSummary"
+                label="Assignment Summary"
+                value={values.AssignmentSummary}
+                variant="filled"
+              />
+              <InputControl
+                name="ImageUploaded"
+                // value={values.ClassLocation}
+                onChange={(e) => handleImage(e)}
+                type="file"
+              />
+              <img
+                src={
+                  imgSrc
+                    ? imgSrc
+                    : assignmentImage && `${API_URL}${assignmentImage}`
+                }
+                height={200}
+                width={200}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <InputControl
+                disabled
+                name="TotalMark"
+                label="Full Marks"
+                value={values.TotalMark}
+                onKeyDown={(e) =>
+                  symbolsArr.includes(e.key) && e.preventDefault()
+                }
+                variant="filled"
+              />
+              <InputControl
+                disabled
+                name="AssignmentName"
+                label="Assignment Name"
+                value={values.AssignmentName}
+                variant="filled"
+              />
+              <InputControl
+                disabled
+                name="DueDate"
+                label="DueDate"
+                value={values.DueDate}
+                variant="filled"
+              />
+              <InputControl
+                disabled
+                name="MarksObtained"
+                label="Marks Obtained"
+                onKeyDown={(e) =>
+                  symbolsArr.includes(e.key) && e.preventDefault()
+                }
+                type="number"
+                value={values.MarksObtained}
+                variant="filled"
+              />
+              <InputControl
+                disabled
+                name="TeacherComment"
+                label="Teacher Comment"
+                value={values.TeacherComment}
+                variant="filled"
+              />
+              <InputControl
+                name="StudentComment"
+                label="StudentComment"
+                value={values.StudentComment}
+                onChange={handleInputChange}
+              />
+            </Grid>
           </Grid>
-          <Grid item xs={6}>
-            <InputControl
-              disabled
-              name="TotalMark"
-              label="Full Marks"
-              value={values.TotalMark}
-              onKeyDown={(e) =>
-                symbolsArr.includes(e.key) && e.preventDefault()
-              }
-              variant="filled"
-            />
-            <InputControl
-              disabled
-              name="AssignmentName"
-              label="Assignment Name"
-              value={values.AssignmentName}
-              variant="filled"
-            />
-            <InputControl
-              disabled
-              name="DueDate"
-              label="DueDate"
-              value={values.DueDate}
-              variant="filled"
-            />
-            <InputControl
-              disabled
-              name="MarksObtained"
-              label="Marks Obtained"
-              onKeyDown={(e) =>
-                symbolsArr.includes(e.key) && e.preventDefault()
-              }
-              type="number"
-              value={values.MarksObtained}
-              variant="filled"
-            />
-            <InputControl
-              disabled
-              name="TeacherComment"
-              label="Teacher Comment"
-              value={values.TeacherComment}
-              variant="filled"
-            />
-            <InputControl
-              name="StudentComment"
-              label="StudentComment"
-              value={values.StudentComment}
-              onChange={handleInputChange}
-            />
-          </Grid>
-        </Grid>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "end",
-            paddingTop: "10px",
-            marginTop: "10px",
-            borderTop: "1px solid #f3f3f3",
-          }}
+        </Form>
+      </DialogContent>
+      <DialogFooter>
+        <Button
+          variant="contained"
+          color="secondary"
+          onClick={() => setOpenPopup(false)}
+          style={{ margin: "10px 0 0 10px" }}
         >
-          <Button
-            variant="contained"
-            color="secondary"
-            onClick={() => setOpenPopup(false)}
-            style={{ margin: "10px 0 0 10px" }}
-          >
-            CANCEL
-          </Button>
-          <Button
-            variant="contained"
-            color="primary"
-            type="submit"
-            disabled={active}
-            style={{ margin: "10px 0 0 10px" }}
-          >
-            {active ? "PROCESSING" : "SUBMIT"}
-          </Button>
-        </div>
-      </Form>
+          CANCEL
+        </Button>
+        <Button
+          variant="contained"
+          color="primary"
+          type="submit"
+          disabled={active}
+          onClick={handleSubmit}
+          style={{ margin: "10px 0 0 10px" }}
+        >
+          {active ? "PROCESSING" : "SUBMIT"}
+        </Button>
+      </DialogFooter>
     </>
   );
 };
